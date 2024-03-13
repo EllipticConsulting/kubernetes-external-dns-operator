@@ -1,0 +1,11 @@
+apiVersion: elliptic.external.dns/v1
+kind: ExternalDns
+metadata:
+  name: test.eu
+spec:
+  host: test.acme.com
+  record_type: A
+  value: 10.10.10.10
+  ttl: 60
+  zone: Z044545
+  provider: aws

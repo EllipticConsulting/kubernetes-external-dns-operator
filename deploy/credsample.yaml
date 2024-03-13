@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: awscred
+  namespace: edns-operator
+data:
+  # convert the key id to base64 and paste it here
+  # echo -n 'key id' | base64
+  AWS_ACCESS_KEY_ID: <KEYID>
+  # convert the key to base64 and paste it here
+  # echo -n 'key...' | base64
+  AWS_SECRET_ACCESS_KEY: <KEY>

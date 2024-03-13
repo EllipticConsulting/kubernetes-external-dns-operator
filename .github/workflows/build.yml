@@ -1,7 +1,7 @@
 name: Builds
 
 env:
-  MAVEN_ARGS: -V -ntp -e
+  MAVEN_ARGS: -V -ntp -e -Djib.disableUpdateChecks=true
 
 on: [push]
 
@@ -16,16 +16,9 @@ jobs:
           distribution: corretto
           java-version: 11
           cache: 'maven'
-      - name: Set up Minikube
-        uses: manusa/actions-setup-minikube@v2.10.0
-        with:
-          minikube version: v1.32.0
-          kubernetes version: 'v1.29.1'
-          driver: 'docker'
-          github token: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy
         run: |
           export git_hash=$(git rev-parse --short "$GITHUB_SHA")
-          mvn ${MAVEN_ARGS} -Dsha1=$git_hash package
-          
+          echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
+          mvn ${MAVEN_ARGS} -Dsha1=$git_hash package    
 

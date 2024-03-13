@@ -21,7 +21,7 @@
         <junit.version>5.9.2</junit.version>
         <log4j.version>2.23.1</log4j.version>
         <fabric8-client.version>6.10.0</fabric8-client.version>
-        <jib-maven-plugin.version>3.1.4</jib-maven-plugin.version>
+        <jib-maven-plugin.version>3.4.1</jib-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -116,9 +116,49 @@
                         <image>amazoncorretto:${java.version}</image>
                     </from>
                     <to>
-                        <image>ghcr.io/ellipticconsulting/edns-operator:${project.version}</image>
+                        <image>ghcr.io/ellipticconsulting/edns-operator</image>
+                        <tags>
+                            <tag>${project.version}</tag>
+                            <tag>latest</tag>
+                        </tags>
                     </to>
+                    <container>
+                        <jvmFlags>
+                            <jvmFlag>-Xms256m</jvmFlag>
+                        </jvmFlags>
+                        <ports>
+                            <port>8080</port>
+                        </ports>
+                        <labels>
+                            <org.opencontainers.image.description>
+                                External DNS Operator for Kubernetes
+                            </org.opencontainers.image.description>
+                            <org.opencontainers.image.version>
+                                ${project.version}
+                            </org.opencontainers.image.version>
+                            <org.opencontainers.image.authors>
+                                info@ellipticconsulting.com
+                            </org.opencontainers.image.authors>
+                            <org.opencontainers.image.vendor>
+                                Elliptic Consulting
+                            </org.opencontainers.image.vendor>
+                            <org.opencontainers.image.source>
+                                https://github.com/EllipticConsulting/kubernetes-external-dns-operator
+                            </org.opencontainers.image.source>
+                            <org.opencontainers.image.url>
+                                https://github.com/EllipticConsulting/kubernetes-external-dns-operator
+                            </org.opencontainers.image.url>
+                        </labels>
+                    </container>
                 </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

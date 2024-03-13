@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kuard-ingress
+  annotations:
+    elliptic.external.dns/hostname: kuard.acme.com
+    elliptic.external.dns/record.type: A
+    elliptic.external.dns/ttl: "120"
+    elliptic.external.dns/zoneid: "Z013124234"
+    elliptic.external.dns/provider: "aws"
+    elliptic.external.dns/value: "8.8.8.8"
+
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: kuard.acme.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: kuard
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
