@@ -1,0 +1,31 @@
+name: Builds
+
+env:
+  MAVEN_ARGS: -V -ntp -e
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Java and Maven
+        uses: actions/setup-java@v4
+        with:
+          distribution: corretto
+          java-version: 11
+          cache: 'maven'
+      - name: Set up Minikube
+        uses: manusa/actions-setup-minikube@v2.10.0
+        with:
+          minikube version: v1.32.0
+          kubernetes version: 'v1.29.1'
+          driver: 'docker'
+          github token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy
+        run: |
+          export git_hash=$(git rev-parse --short "$GITHUB_SHA")
+          mvn ${MAVEN_ARGS} -Dsha1=$git_hash package
+          
+
