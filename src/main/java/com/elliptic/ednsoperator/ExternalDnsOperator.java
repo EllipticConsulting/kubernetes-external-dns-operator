@@ -32,7 +32,7 @@ public class ExternalDnsOperator {
         operator.register(new ServiceReconciler());
         operator.register(new IngressReconciler());
         operator.start();
-        log.info("Operator started.");
+        log.info("External DNS Operator started.");
 
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
         server.createContext("/startup", new StartupHandler(operator));

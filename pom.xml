@@ -6,7 +6,7 @@
 
     <groupId>elliptic</groupId>
     <artifactId>external-dns-operator</artifactId>
-    <version>0.1.3-${sha1}</version>
+    <version>0.1.4-${sha1}</version>
     <name>external-dns-operator</name>
     <packaging>jar</packaging>
 
@@ -19,7 +19,7 @@
         <josdk.version>4.8.0</josdk.version>
         <slf4j.version>1.7.36</slf4j.version>
         <junit.version>5.9.2</junit.version>
-        <log4j.version>2.23.1</log4j.version>
+        <log4j.version>2.25.3</log4j.version>
         <fabric8-client.version>6.10.0</fabric8-client.version>
         <jib-maven-plugin.version>3.4.1</jib-maven-plugin.version>
     </properties>
@@ -36,7 +36,7 @@
             <dependency>
                 <groupId>software.amazon.awssdk</groupId>
                 <artifactId>bom</artifactId>
-                <version>2.25.6</version>
+                <version>2.29.23</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -101,7 +101,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
+            <version>1.18.36</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
